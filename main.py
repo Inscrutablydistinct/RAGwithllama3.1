@@ -31,7 +31,7 @@ PLease note that:
 - If a query specifies a date, include "<", ">", ">=", "<=", "=" to denote before, after, after and on, before and on, and on the publication date, respectively.
 - If the query includes a metadata attribute term (e.g., author) without a specific name, include it in the main query instead of identifying it as a metadata attribute.
 - The 'abstract' attribute should be present in all, but it shouldn't be more than 20 words long.
-- Give the output at all costs, always include the main query and the non empty identified metadata attributes.
+- Give the output at all costs, always include the main query and the non-empty/nont null identified metadata attributes.
 
 Examples:
 
