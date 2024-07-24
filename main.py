@@ -59,7 +59,6 @@ Examples:
    abstract: 'A novel way to devise therapeutic drugs to treat cancer.'
    Main Query: "Give me a novel way to devise therapeutic drugs to treat cancer."
    Output: ["Give me a novel way to devise therapeutic drugs to treat cancer.", {"abstract": "A novel way to devise therapeutic drugs to treat cancer.", "keywords":"cancer"}]
-Don't give nay output. At all.
 The answer should only be a list and no other content whatsoever. Please print the Output for the following query:\n
 """
 # Splitting documents
