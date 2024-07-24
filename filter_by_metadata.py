@@ -19,6 +19,7 @@ def filter_attributes(metadata_entry, key, value):
         cos_sim = compute_cosine_similarity(metadata_entry['title'], value)
         return cos_sim*5
     elif (key == 'author'):
+        print("hi")
         cos_sim = compute_cosine_similarity(metadata_entry['author'], value)
         return cos_sim*5
     elif (key == 'abstract'):
