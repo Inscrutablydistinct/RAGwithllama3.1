@@ -94,13 +94,13 @@ def ans(context, question):
     
     If you don't know the answer, just say "I don't know." Don't try to make up an answer.
     
-    It is very important that you ALWAYS answer the question in the same language the question is in. Remember to always do that.
+    It is very important that you ALWAYS answer the question in the same language the question is in.
     
     Use the following pieces of context to answer the question at the end.
     
     Context: {context}
     
-    Question is below. Remember to answer only in English:
+    Question is below.
     
     Question: {question}
     """
