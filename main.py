@@ -29,7 +29,7 @@ Note:
 - The attribute 'keywords' must be non-empty and always present in the final output.
 - The main query should be the input user query.
 - If a query specifies a date, include "<", ">", ">=", "<=", "=" to denote before, after, after and on, before and on, and on the publication date, respectively.
-- From the user query make the main query and the metadata attributes.
+- Only identify the attribute 'author' if the name of the author is explicitly mentioned in the user query.
 - If the query includes a metadata attribute term (e.g., author) without a specific name, include it in the main query instead of identifying it as a metadata attribute.
 - The 'abstract' attribute should be present in all, but it shouldn't be more than 20 words long.
 - Give the output at all costs, always include the main query and the non empty/null identified metadata attributes.
