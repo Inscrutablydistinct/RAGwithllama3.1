@@ -30,7 +30,7 @@ Note:
 - The main query should be the input user query.
 - If a query specifies a date, include "<", ">", ">=", "<=", "=" to denote before, after, after and on, before and on, and on the publication date, respectively.
 - If the query includes a metadata attribute term (e.g., author) without a specific name, include it in the main query instead of identifying it as a metadata attribute.
-- To reinstate the previous point only identify those attributes whose values are given in the user query.
+- To reinstate the previous point don't give those metadata attributes whose values are unknown or you are not confident about.
 - The 'abstract' attribute should be present in all, but it shouldn't be more than 20 words long.
 - Give the output at all costs, always include the main query and the non empty/null identified metadata attributes.
 
