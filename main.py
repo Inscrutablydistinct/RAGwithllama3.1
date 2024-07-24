@@ -88,7 +88,7 @@ def ans(context, question):
     """
 
     response = client.chat.completions.create(
-        model="llama3.1:8b",
+        model="phi3:latest",
         temperature=0.5,
         n=1,
         messages=[
