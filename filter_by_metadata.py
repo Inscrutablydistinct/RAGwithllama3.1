@@ -8,6 +8,7 @@ from transformers import (
     BitsAndBytesConfig,
     pipeline
 )
+from model_param import CFG, embeddings
 from langchain_community.vectorstores import FAISS
 from datetime import datetime
 
