@@ -1,7 +1,7 @@
 from query_extraction import generate_md
 import text_split
 from model_param import CFG
-from embeddings_and_context import make_context
+from embeddings_and_context import make_context, make_embeddings
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import urllib.parse
 from filter_by_metadata import filter_data
@@ -62,7 +62,7 @@ The answer should only be a list and no other content whatsoever. Please print t
 """
 # Splitting documents
 list_of_documents = text_split.text_split(d)
-
+make_embeddings(list_of_documents)
 # Initializing the OpenAI client
 client = openai.OpenAI(
     base_url="http://localhost:11434/v1",
