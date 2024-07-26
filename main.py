@@ -2,6 +2,7 @@ from query_extraction import generate_md
 import text_split
 from model_param import CFG
 from embeddings_and_context import make_context, make_embeddings
+from langchain_community.vectorstores import FAISS
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import urllib.parse
 from filter_by_metadata import filter_data
@@ -11,7 +12,6 @@ import time
 import warnings
 import openai
 from collections import defaultdict
-from langchain_community.vectorstores import FAISS
 
 warnings.filterwarnings("ignore")
 
