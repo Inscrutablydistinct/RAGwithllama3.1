@@ -11,6 +11,8 @@ import time
 import warnings
 import openai
 from collections import defaultdict
+from langchain_community.vectorstores import FAISS
+
 warnings.filterwarnings("ignore")
 
 with open('metadata.json') as f:
