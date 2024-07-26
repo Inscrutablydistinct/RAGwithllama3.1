@@ -12,10 +12,6 @@ from model_param import CFG, embeddings
 from langchain_community.vectorstores import FAISS
 from datetime import datetime
 
-vectordb = FAISS.load_local(CFG.Output_folder + '/faiss_index_papers', # from output folder
-        embeddings,
-        allow_dangerous_deserialization = True,)
-
 def compute_cosine_similarity(text1, text2):
     embed1 = embeddings.embed_query(str(text1))
     return cosine_similarity([embed1], [text2])[0][0]
@@ -59,6 +55,9 @@ def filter_attributes(metadata_entry, key, value):
         return 0.0
 
 def filter_data(metadata, filter_dict):
+    vectordb = FAISS.load_local(CFG.Output_folder + '/faiss_index_papers', # from output folder
+        embeddings,
+        allow_dangerous_deserialization = True,)
     scored_metadata = []
     store = {}
     for entry in metadata:
