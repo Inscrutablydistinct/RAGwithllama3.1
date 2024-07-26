@@ -8,6 +8,7 @@ from transformers import (
     BitsAndBytesConfig,
     pipeline
 )
+from langchain_community.vectorstores import FAISS
 from datetime import datetime
 
 vectordb = FAISS.load_local(CFG.Output_folder + '/faiss_index_papers', # from output folder
