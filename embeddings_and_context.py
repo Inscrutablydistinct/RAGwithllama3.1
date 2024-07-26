@@ -16,12 +16,7 @@ def make_embeddings(list_of_documents):
         )
 
         vectordb.save_local(f"{CFG.Output_folder}/faiss_index_papers")
-    else:
-        vectordb = FAISS.load_local(CFG.Output_folder + '/faiss_index_papers', # from output folder
-        embeddings,
-        allow_dangerous_deserialization = True,)
-    return vectordb
-
+        
 def find_similar(list_of_documents, top):
     filtered_indices = []
     title = top['title']
@@ -33,7 +28,9 @@ def find_similar(list_of_documents, top):
     return filtered_indices, filtered_documents
 
 def make_context(list_of_documents, top_md, out):
-    vectordb = make_embeddings(list_of_documents)
+    vectordb = FAISS.load_local(CFG.Output_folder + '/faiss_index_papers', # from output folder
+        embeddings,
+        allow_dangerous_deserialization = True,)
     filtered_indices, filtered_documents = find_similar(list_of_documents, top_md)
     if not filtered_indices:
         print("No documents found with the specified metadata.")
