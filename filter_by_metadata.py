@@ -10,6 +10,10 @@ from transformers import (
 )
 from datetime import datetime
 
+vectordb = FAISS.load_local(CFG.Output_folder + '/faiss_index_papers', # from output folder
+        embeddings,
+        allow_dangerous_deserialization = True,)
+
 def compute_cosine_similarity(text1, text2):
     embed1 = embeddings.embed_query(str(text1))
     return cosine_similarity([embed1], [text2])[0][0]
