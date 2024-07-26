@@ -65,7 +65,6 @@ The answer should only be a list and no other content whatsoever. Please print t
 # Splitting documents
 list_of_documents = text_split.text_split(d)
 make_embeddings(list_of_documents)
-print("hiii")
 
 client = openai.OpenAI(
     base_url="http://localhost:11434/v1",
