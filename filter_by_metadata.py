@@ -45,14 +45,18 @@ def filter_attributes(metadata_entry, key, value, corpus_store):
         return 0.0
 
 def filter_data(metadata, filter_dict):
-    vectordb = FAISS.load_local(CFG.Output_folder + '/faiss_index_papers', embeddings, allow_dangerous_deserialization=True)
     scored_metadata = []
-    corpus_store = {key: [entry.get(key, "") for entry in metadata] for key in filter_dict.keys() if key != 'publication_date'}
-
+    store = {}
     for entry in metadata:
         total_score = 0.0
         for key, value in filter_dict.items():
-            total_score += filter_attributes(entry, key, value, corpus_store)
+            if (key == 'publication_date'):
+                total_score += filter_attributes(entry, key, value)
+            elif key in store:
+                total_score += filter_attributes(entry, key, store[key])
+            else:
+                store[key] = embeddings.embed_query(value)
+                total_score += filter_attributes(entry, key, store[key])
         print(total_score)
         scored_metadata.append((total_score, entry))
 
