@@ -10,19 +10,22 @@ def tokenize(text):
     return text.lower().split()
 
 def compute_bm25_score(corpus, query):
-    print(corpus)
     tokenized_corpus = [tokenize(doc) for doc in corpus]
     bm25 = BM25Okapi(tokenized_corpus)
     tokenized_query = tokenize(query)
     scores = bm25.get_scores(tokenized_query)
     return scores
 
-def filter_attributes(metadata_entry, key, value, corpus_store):
+def filter_attributes(metadata_entry, key, value, bm25_store):
     if key in ['title', 'author', 'abstract', 'keywords', 'results']:
         field_text = metadata_entry.get(key, "")
-        corpus = corpus_store.get(key, [])
-        scores = compute_bm25_score(corpus, value)
-        index = corpus.index(field_text) if field_text in corpus else -1
+        print(field_text)
+        bm25 = bm25_store.get(key)
+        if bm25 is None:
+            return 0.0
+        tokenized_query = tokenize(value)
+        scores = bm25.get_scores(tokenized_query)
+        index = bm25.doc_freqs[0].index(field_text.lower()) if field_text.lower() in bm25.doc_freqs[0] else -1
         return scores[index] * 5 if index != -1 else 0.0
     elif key == 'publication_date':
         op = value[0] if value[1].isdigit() else value[0:2]
@@ -46,12 +49,17 @@ def filter_attributes(metadata_entry, key, value, corpus_store):
 
 def filter_data(metadata, filter_dict):
     scored_metadata = []
-    corpus_store = {key: [entry.get(key, "") for entry in metadata] for key in filter_dict.keys() if key != 'publication_date'}
+    bm25_store = {}
+    for key in filter_dict.keys():
+        if key != 'publication_date':
+            corpus = [entry.get(key, "") for entry in metadata]
+            tokenized_corpus = [tokenize(doc) for doc in corpus]
+            bm25_store[key] = BM25Okapi(tokenized_corpus)
 
     for entry in metadata:
         total_score = 0.0
         for key, value in filter_dict.items():
-            total_score += filter_attributes(entry, key, value, corpus_store)
+            total_score += filter_attributes(entry, key, value, bm25_store)
         print(total_score)
         scored_metadata.append((total_score, entry))
 
