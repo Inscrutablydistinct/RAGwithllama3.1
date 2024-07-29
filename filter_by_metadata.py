@@ -1,7 +1,7 @@
 import warnings
 from datetime import datetime
 from rank_bm25 import BM25Okapi
-from model_param import CFG
+from model_param import CFG, embeddings
 from langchain_community.vectorstores import FAISS
 
 warnings.filterwarnings("ignore")
