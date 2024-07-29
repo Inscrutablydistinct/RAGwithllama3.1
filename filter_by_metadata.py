@@ -11,6 +11,7 @@ def tokenize(text):
 
 def compute_bm25_score(corpus, query):
     tokenized_corpus = [tokenize(doc) for doc in corpus]
+    print("hi")
     bm25 = BM25Okapi(tokenized_corpus)
     tokenized_query = tokenize(query)
     scores = bm25.get_scores(tokenized_query)
