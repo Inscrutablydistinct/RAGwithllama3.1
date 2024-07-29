@@ -1,14 +1,13 @@
 import warnings
 from datetime import datetime
 from rank_bm25 import BM25Okapi
-from model_param import CFG, embeddings
+from model_param import CFG
 from langchain_community.vectorstores import FAISS
 
 warnings.filterwarnings("ignore")
 
 def tokenize(text):
-    print(text)
-    return text.split()
+    return text.lower().split()
 
 def compute_bm25_score(corpus, query):
     tokenized_corpus = [tokenize(doc) for doc in corpus]
