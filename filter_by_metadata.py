@@ -7,7 +7,7 @@ from langchain_community.vectorstores import FAISS
 warnings.filterwarnings("ignore")
 
 def tokenize(text):
-    return text.lower().split()
+    return text.split()
 
 def compute_bm25_score(corpus, query):
     tokenized_corpus = [tokenize(doc) for doc in corpus]
