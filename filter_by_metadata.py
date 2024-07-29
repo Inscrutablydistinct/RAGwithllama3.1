@@ -7,11 +7,11 @@ from langchain_community.vectorstores import FAISS
 warnings.filterwarnings("ignore")
 
 def tokenize(text):
+    print(text)
     return text.split()
 
 def compute_bm25_score(corpus, query):
     tokenized_corpus = [tokenize(doc) for doc in corpus]
-    print("hi")
     bm25 = BM25Okapi(tokenized_corpus)
     tokenized_query = tokenize(query)
     scores = bm25.get_scores(tokenized_query)
@@ -21,7 +21,6 @@ def filter_attributes(metadata_entry, key, value, corpus_store):
     if key in ['title', 'author', 'abstract', 'keywords', 'results']:
         field_text = metadata_entry.get(key, "")
         corpus = corpus_store.get(key, [])
-        print(corpus)
         scores = compute_bm25_score(corpus, value)
         index = corpus.index(field_text) if field_text in corpus else -1
         return scores[index] * 5 if index != -1 else 0.0
