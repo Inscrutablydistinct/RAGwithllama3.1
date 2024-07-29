@@ -20,8 +20,8 @@ def filter_attributes(metadata_entry, key, value, corpus_store):
     if key in ['title', 'author', 'abstract', 'keywords', 'results']:
         field_text = metadata_entry.get(key, "")
         corpus = corpus_store.get(key, [])
-        print(value)
-        scores = compute_bm25_score(corpus, str(value))
+        print(corpus)
+        scores = compute_bm25_score(corpus, value)
         index = corpus.index(field_text) if field_text in corpus else -1
         return scores[index] * 5 if index != -1 else 0.0
     elif key == 'publication_date':
