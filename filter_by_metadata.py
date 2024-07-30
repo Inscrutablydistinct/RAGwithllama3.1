@@ -58,6 +58,7 @@ def filter_data(metadata, filter_dict):
             corpus = [entry.get(key, "") for entry in metadata]
             print(corpus)
             tokenized_corpus = [tokenize(doc) for doc in corpus]
+            print("hi")
             bm25_store[key] = BM25Okapi(tokenized_corpus)
 
     for entry in metadata:
