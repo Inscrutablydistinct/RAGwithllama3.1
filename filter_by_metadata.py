@@ -10,6 +10,8 @@ def tokenize(text):
     return text.lower().split()
 
 def compute_bm25_score(corpus, query):
+    print(f"{corpus}\n")
+    print(query)
     tokenized_corpus = [tokenize(doc) for doc in corpus]
     bm25 = BM25Okapi(tokenized_corpus)
     tokenized_query = tokenize(query)
