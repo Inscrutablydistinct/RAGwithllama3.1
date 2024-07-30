@@ -8,12 +8,10 @@ warnings.filterwarnings("ignore")
 
 def tokenize(text):
     if isinstance(text, list):
-        return [a.lower().split() for a in text]
+        return [" ".join(a).lower().split() if isinstance(a, list) else a.lower().split() for a in text]
     return text.lower().split()
 
 def compute_bm25_score(corpus, query):
-    # print(f"{corpus}\n")
-    # print(query)
     tokenized_corpus = [tokenize(doc) for doc in corpus]
     bm25 = BM25Okapi(tokenized_corpus)
     tokenized_query = tokenize(query)
@@ -23,13 +21,17 @@ def compute_bm25_score(corpus, query):
 def filter_attributes(metadata_entry, key, value, bm25_store):
     if key in ['title', 'author', 'abstract', 'keywords', 'results']:
         field_text = metadata_entry.get(key, "")
-        print(field_text)
+        if isinstance(field_text, list):
+            field_text = " ".join(field_text)
         bm25 = bm25_store.get(key)
         if bm25 is None:
             return 0.0
         tokenized_query = tokenize(value)
         scores = bm25.get_scores(tokenized_query)
-        index = bm25.doc_freqs[0].index(field_text.lower()) if field_text.lower() in bm25.doc_freqs[0] else -1
+        index = -1
+        flat_corpus = [" ".join(doc) if isinstance(doc, list) else doc for doc in bm25.corpus]
+        if field_text.lower() in flat_corpus:
+            index = flat_corpus.index(field_text.lower())
         return scores[index] * 5 if index != -1 else 0.0
     elif key == 'publication_date':
         op = value[0] if value[1].isdigit() else value[0:2]
@@ -56,10 +58,8 @@ def filter_data(metadata, filter_dict):
     bm25_store = {}
     for key in filter_dict.keys():
         if key != 'publication_date':
-            corpus = [entry.get(key, "") for entry in metadata]
-            print(corpus)
+            corpus = [" ".join(entry.get(key, "")) if isinstance(entry.get(key, ""), list) else entry.get(key, "") for entry in metadata]
             tokenized_corpus = [tokenize(doc) for doc in corpus]
-            print("hi")
             bm25_store[key] = BM25Okapi(tokenized_corpus)
 
     for entry in metadata:
