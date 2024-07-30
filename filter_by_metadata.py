@@ -7,9 +7,10 @@ from langchain_community.vectorstores import FAISS
 warnings.filterwarnings("ignore")
 
 def tokenize(text):
-    print(print(a) for a in text)
-    return [a.lower.split() for a in text] if isinstance(text, list) else text.lower.split()
- 
+    if isinstance(text, list):
+        return [a.lower().split() for a in text]
+    return text.lower().split()
+
 def compute_bm25_score(corpus, query):
     # print(f"{corpus}\n")
     # print(query)
