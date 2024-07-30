@@ -10,8 +10,8 @@ def tokenize(text):
     return text.lower().split()
 
 def compute_bm25_score(corpus, query):
-    print(f"{corpus}\n")
-    print(query)
+    # print(f"{corpus}\n")
+    # print(query)
     tokenized_corpus = [tokenize(doc) for doc in corpus]
     bm25 = BM25Okapi(tokenized_corpus)
     tokenized_query = tokenize(query)
@@ -55,6 +55,7 @@ def filter_data(metadata, filter_dict):
     for key in filter_dict.keys():
         if key != 'publication_date':
             corpus = [entry.get(key, "") for entry in metadata]
+            print(corpus)
             tokenized_corpus = [tokenize(doc) for doc in corpus]
             bm25_store[key] = BM25Okapi(tokenized_corpus)
 
