@@ -28,12 +28,10 @@ arxiv_id
 results
 
 PLease note that:
-- The attribute 'keywords' must be non-empty and always present in the final output.
-- The main query should be the input user query.
 - If a query specifies a date, include "<", ">", ">=", "<=", "=" to denote before, after, after and on, before and on, and on the publication date, respectively.
-- If the query includes a metadata attribute term (e.g., author) without a specific name, include it in the main query instead of identifying it as a metadata attribute.
-- The 'abstract' attribute should be present in all, but it shouldn't be more than 20 words long.
-- Give the output at all costs, always include the main query and the non-empty/nont null identified metadata attributes.
+- If the query includes a metadata attribute term (e.g., author) without a specific value, do not identify it as a metadata attribute.
+- The 'abstract' and 'keywords' attributes should be present in all, but they shouldn't be more than 20 words long.
+- Always give the output only and in the form of a python dictionary. Include the non empty identified metadata attributes.
 
 Examples:
 
@@ -42,8 +40,7 @@ Examples:
    abstract: 'paper on DNA bending'
    publication_date: '27 August 2024'
    keywords: 'DNA bending'
-   Main Query: "I need the abstract and results from the recent paper."
-   Output: ["I need the abstract and results from the recent paper on DNA bending after 27 August 2024.", {"abstract": "paper on DNA bending", "publication_date": ">2024-08-27", "keywords": "DNA bending"}]
+   Output: {"abstract": "paper on DNA bending", "publication_date": ">2024-08-27", "keywords": "DNA bending"}
 
 2. Query: "Please provide the title and abstract of the latest research paper by Dr. Lee published on 15 June 2023 about AI in healthcare."
    Identified Attributes:
@@ -51,15 +48,13 @@ Examples:
    abstract: 'study on healthcare'
    publication_date: '15 June 2023'
    keywords: 'AI in healthcare'
-   Main Query: "Please provide the title and abstract of the latest research paper."
-   Output: ["Please provide the title and abstract of the latest research paper about AI in healthcare.", {"author": "Dr. Lee", "abstract": "study on healthcare", "publication_date": "=2023-06-15", "keywords": "AI in healthcare"}]
+   Output: {"author": "Dr. Lee", "abstract": "study on healthcare", "publication_date": "=2023-06-15", "keywords": "AI in healthcare"}
 
 3. Query: "Give me a novel way to devise therapeutic drugs to treat cancer?"
    Identified Attributes:
    keywords: 'cancer'
    abstract: 'A novel way to devise therapeutic drugs to treat cancer.'
-   Main Query: "Give me a novel way to devise therapeutic drugs to treat cancer."
-   Output: ["Give me a novel way to devise therapeutic drugs to treat cancer.", {"abstract": "A novel way to devise therapeutic drugs to treat cancer.", "keywords":"cancer"}]
+   Output: {"abstract": "A novel way to devise therapeutic drugs to treat cancer.", "keywords":"cancer"}
 The answer should only be a list and no other content whatsoever. Please print the Output for the following query:\n
 """
 # Splitting documents
