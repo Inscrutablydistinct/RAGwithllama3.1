@@ -116,7 +116,7 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
 
                 out = generate_md(Question, query, client)
                 filtered_metadata = filter_data(d, out)
-                context = preprocess(make_context(list_of_documents, filtered_metadata[0], query ,out))
+                context = preprocess(make_context(list_of_documents, filtered_metadata[0], query))
                 answer = ans(context, out[0])
                 response_data = {
                     "answer": answer,
