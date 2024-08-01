@@ -29,7 +29,7 @@ def generate_md(Question, query, client):
     text = process_llm_response(text)
     print(f"LLM Response: {text}")  # Debugging statement
     
-    pattern = r'\[\s*"([^"]*)",\s*\{([^}]*)\}(?:,\s*\'([^\']*)\')?\s*\]'
+    pattern = r'\{(?:\s*\"[^\"]*\"\s*:\s*\"[^\"]*\"\s*,?)*\}'
     match = re.search(pattern, text)
     if match:
         output_list = match.group(0)
