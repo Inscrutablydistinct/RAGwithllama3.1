@@ -10,7 +10,7 @@ with open('metadata.json') as f:
 def generate_md(Question, query, client):
     prompt = f"{Question}{query}"
     response = client.chat.completions.create(
-      model="llama3.1:8b",
+      model="phi3:latest",
       temperature=0.6,
       n=1,
       messages=[
