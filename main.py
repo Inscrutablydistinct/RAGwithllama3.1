@@ -86,7 +86,7 @@ def ans(context, question):
 
     response = client.chat.completions.create(
         model="phi3:latest",
-        temperature=0.5,
+        temperature=0.6,
         n=1,
         messages=[
             {"role": "system", "content": "You are a helpful assistant."},
