@@ -30,8 +30,8 @@ results
 PLease note that:
 - If a query specifies a date, include "<", ">", ">=", "<=", "=" to denote before, after, after and on, before and on, and on the publication date, respectively.
 - If the query includes a metadata attribute term (e.g., author) without a specific value, do not identify it as a metadata attribute.
-- The 'abstract' and 'keywords' attributes should be present in all, but they shouldn't be more than 20 words long.
-- Always give the output only and in the form of a python dictionary. Include the non empty identified metadata attributes.
+- The 'abstract' and 'keywords' attributes should always be identified, but they shouldn't be more than 10 words long.
+- Always give the output in the form of a python dictionary. Only include the identified metadata attributes.
 
 Examples:
 
