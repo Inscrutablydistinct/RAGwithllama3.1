@@ -27,8 +27,8 @@ def find_similar(list_of_documents, top):
             filtered_indices.append(idx)
     return filtered_indices, filtered_documents
 
-def make_context(list_of_documents, top_md, query):
-    vectordb = FAISS.load_local(CFG.Output_folder + '/faiss_index_papers',
+def make_context(list_of_documents, top_md, out):
+    vectordb = FAISS.load_local(CFG.Output_folder + '/faiss_index_papers', # from output folder
         embeddings,
         allow_dangerous_deserialization = True,)
     filtered_indices, filtered_documents = find_similar(list_of_documents, top_md)
@@ -40,6 +40,7 @@ def make_context(list_of_documents, top_md, query):
         if len(filtered_embeddings.shape) == 1:
             filtered_embeddings = filtered_embeddings.reshape(1, -1)
 
+        query = out[0]
         print(f"\n\n{query}\n\n")
         query_embedding = embeddings.embed_query(query)
         query_embedding = np.array(query_embedding).reshape(1, -1)
